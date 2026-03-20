@@ -1,0 +1,4 @@
+--- REPORTE DE PROCESAMIENTO ---
+Frase Original: The only thing we have to fear is fear itself.
+Frase Recuperada: The only thing we have to fear is fear itself.
+Estado: EXITO

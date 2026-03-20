@@ -1,11 +1,11 @@
 package org.example;
 
 public class Nodo {
-    int valor; // Almacena el ASCII modificado
+    int dato;
     Nodo siguiente;
 
-    public Nodo(int valor) {
-        this.valor = valor;
+    public Nodo(int dato) {
+        this.dato = dato;
         this.siguiente = null;
     }
 }

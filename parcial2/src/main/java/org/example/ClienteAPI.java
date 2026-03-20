@@ -8,20 +8,21 @@ import java.net.http.HttpResponse;
 public class ClienteAPI {
     public static String obtenerFrase() {
         try {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
+            HttpClient cliente = HttpClient.newHttpClient();
+            HttpRequest solicitud = HttpRequest.newBuilder()
                     .uri(URI.create("https://zenquotes.io/api/random"))
                     .build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> respuesta = cliente.send(solicitud, HttpResponse.BodyHandlers.ofString());
+            String cuerpo = respuesta.body();
 
-            String body = response.body();
-            int inicio = body.indexOf("\"q\":\"") + 5;
-            int fin = body.indexOf("\",\"a\"");
+            int inicio = cuerpo.indexOf("\"q\":\"") + 5;
+            int fin = cuerpo.indexOf("\",\"a\"");
 
-            return body.substring(inicio, fin);
+            return cuerpo.substring(inicio, fin);
         } catch (Exception e) {
-            return "ERROR AL CONECTAR CON LA API";
+            // Si no hay internet o falla la API, devolvemos esta:
+            return "El exito es la suma de pequenos esfuerzos";
         }
     }
 }

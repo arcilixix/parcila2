@@ -1,9 +1,10 @@
 package org.example;
+
 import java.util.ArrayDeque;
 
 public class Frase {
     private String textoOriginal;
-    private ArrayDeque<ListaSimple> palabrasCola; // Soporte Fase 1
+    private ArrayDeque<ListaSimple> palabrasCola;
 
     public Frase(String textoOriginal) {
         this.textoOriginal = textoOriginal;
@@ -16,16 +17,29 @@ public class Frase {
             ListaSimple lista = new ListaSimple();
             for (int i = 0; i < p.length(); i++) {
                 int incremento = 1 + (i * 2);
-                int valorAscii = (int) p.charAt(i) + incremento;
-                lista.insertar(valorAscii);
+                lista.insertar((int) p.charAt(i) + incremento);
             }
             lista.intercambiarPares();
-            // Paso 3: Almacenar en ArrayDeque
             palabrasCola.addLast(lista);
         }
     }
 
-    public ArrayDeque<ListaSimple> getPalabrasCola() {
-        return palabrasCola;
+    public String desencriptar() {
+        StringBuilder sb = new StringBuilder();
+        while (!palabrasCola.isEmpty()) {
+            ListaSimple lista = palabrasCola.pollFirst();
+            lista.intercambiarPares();
+
+            Nodo temp = lista.cabeza;
+            int i = 0;
+            while (temp != null) {
+                int incremento = 1 + (i * 2);
+                sb.append((char) (temp.dato - incremento));
+                temp = temp.siguiente;
+                i++;
+            }
+            sb.append(" ");
+        }
+        return sb.toString().trim();
     }
 }
